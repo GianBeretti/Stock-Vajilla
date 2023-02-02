@@ -39,19 +39,24 @@ const stockProductSchema = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
+    },
+    amount: {
+        allowNull: false,
+        type: DataTypes.INTEGER
     }
 }
 
 
 class StockProduct extends Model {
     static associate(models){
-        //
+        
     }
     static config(sequelize){
         return{
             sequelize,
             tableName: STOCK_PRODUCT_TABLE,
-            modelName: 'StockProduct'
+            modelName: 'StockProduct',
+            timestamps: false
         }
     }
 }

@@ -37,11 +37,11 @@ class Product extends Model {
         this.belongsTo(models.Category, {
             as: 'categories'
         })
-        this.belongsToMany(models), {
-            through: models.StockProduct,
-            foreignKey: 'productId',
-            otherKey: 'stockId'
-        }
+        // this.belongsToMany(models), {
+        //     through: models.StockProduct,
+        //     foreignKey: 'productId',
+        //     otherKey: 'stockId'
+        // }
     }
     static config(sequelize){
         return {

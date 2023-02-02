@@ -42,7 +42,7 @@ const customerSchema = {
 
 class Customer extends Model {
     static associate(models){
-        this.belongsTo(models.User, {as: 'customer'})
+        this.belongsTo(models.User, {as: 'user'})
 
         this.hasMany(models.Stock),{
             as: 'stock',
@@ -54,7 +54,7 @@ class Customer extends Model {
         return{
             sequelize,
             tableName: CUSTOMER_TABLE,
-            modelName: 'customers',
+            modelName: 'Customer',
             timestamps: false,
         }
     }

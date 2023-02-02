@@ -1,8 +1,9 @@
 const express = require('express');
 const UserService = require('./../services/user.services');
 const validatorHandler = require('../middleware/validatorHandler');
-const {getUserSchema, createUserSchema} = require('./../schemas/user-schema')
-const { models } = require('./../libs/sequelize')
+const {getUserSchema, createUserSchema, updateUserSchema} = require('./../schemas/user-schema');
+
+
 const router = express.Router();
 const service = new UserService();
 
@@ -19,7 +20,8 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const {id} = req.params;
-        res.json({id})
+        const rta = await service.findOne(id)
+        res.json(rta)
     } catch (error) {
         next('error')
     }
@@ -30,7 +32,7 @@ router.post('/',
     async (req, res, next) => {
         try {
             const body = req.body;
-            const newUser = await models.User.create(body)
+            const newUser = await service.create(body)
             console.log(newUser)
             res.json(newUser)
         } catch (error) {
@@ -38,19 +40,25 @@ router.post('/',
         }
 })
 
-router.patch('/:id', async(req, res, next) => {
+router.patch('/:id',
+    validatorHandler(updateUserSchema, 'body'),
+    async(req, res, next) => {
     try {
         const {id} = req.params;
         const body = req.body;
-        res.json({id})
+        const user =  await service.update(id, body)
+        res.json(user)
     } catch (error) {
         next(error)
     }
 })
 
-router.delete('/:id', async(req, res, next) => {
+router.delete('/:id',
+    validatorHandler(getUserSchema, 'params'),
+    async(req, res, next) => {
     try {
         const {id} = req.params;
+        await service.delete(id)
         res.json({id})
     } catch (error) {
         next(error)
