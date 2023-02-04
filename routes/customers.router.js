@@ -2,7 +2,6 @@ const express = require('express');
 const CustomerService = require('./../services/customer.service');
 const validatorHandler = require('./../middleware/validatorHandler')
 const {getCustomerSchema, createUserSchema, updateCustomerSchema} = require('./../schemas/customer.schema');
-const { async } = require('jshint/src/prod-params');
 
 const router = express.Router();
 const service = new CustomerService();

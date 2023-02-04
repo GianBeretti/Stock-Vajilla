@@ -22,7 +22,6 @@ const productSchema = {
         allowNull: false,
         field: 'category_id',
         type: DataTypes.INTEGER,
-        unique: true,
         references: {
             model: CATEGORY_TABLE,
             key: 'id'
@@ -35,7 +34,7 @@ const productSchema = {
 class Product extends Model {
     static associate(models){
         this.belongsTo(models.Category, {
-            as: 'categories'
+            as: 'category',
         })
         // this.belongsToMany(models), {
         //     through: models.StockProduct,
