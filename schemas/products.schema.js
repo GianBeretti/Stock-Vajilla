@@ -2,7 +2,7 @@ const { create } = require('handlebars');
 const Joi = require('joi');
 
 const id = Joi.number().integer();
-const name = Joi.string().min(4);
+const name = Joi.string();
 const image = Joi.string();
 const categoryId = Joi.number().integer();
 

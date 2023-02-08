@@ -27,7 +27,7 @@ const stockProductSchema = {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
     stockId: {
         field: 'stock_id',
@@ -38,7 +38,7 @@ const stockProductSchema = {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
     amount: {
         allowNull: false,

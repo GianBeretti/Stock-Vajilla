@@ -27,7 +27,7 @@ const productSchema = {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     }
 }
 
@@ -36,11 +36,6 @@ class Product extends Model {
         this.belongsTo(models.Category, {
             as: 'category',
         })
-        // this.belongsToMany(models), {
-        //     through: models.StockProduct,
-        //     foreignKey: 'productId',
-        //     otherKey: 'stockId'
-        // }
     }
     static config(sequelize){
         return {

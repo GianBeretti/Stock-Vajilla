@@ -19,7 +19,7 @@ const stockSchema = {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
     createdAt: {
         allowNull: false,
