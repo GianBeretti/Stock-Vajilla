@@ -9,20 +9,20 @@ const {customerSchema, Customer} = require('./customer.model');
 
 function setupModels(sequelize){ 
     User.init(userSchema, User.config(sequelize));
+    Customer.init(customerSchema, Customer.config(sequelize));
     Stock.init(stockSchema, Stock.config(sequelize));
     StockProduct.init(stockProductSchema, StockProduct.config(sequelize));
     Product.init(productSchema, Product.config(sequelize));
     Category.init(categorySchema, Category.config(sequelize));
-    Customer.init(customerSchema, Customer.config(sequelize));
 
 
 
     User.associate(sequelize.models);
+    Customer.associate(sequelize.models);
     Stock.associate(sequelize.models);
     StockProduct.associate(sequelize.models);
     Product.associate(sequelize.models);
     Category.associate(sequelize.models);
-    Customer.associate(sequelize.models);
 
 };
 

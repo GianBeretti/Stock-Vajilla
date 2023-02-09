@@ -1,28 +1,30 @@
 const {Model, DataTypes, Sequelize} = require('sequelize');
 const {CUSTOMER_TABLE} = require('./customer.model')
+
 const STOCK_TABLE = 'stocks';
 const moment = require('moment')
 
 const stockSchema = {
     id: {
         allowNull: false,
-        primaryKey: true,
-        aoutoIncrement: true,
+        autoIncrement: true, 
+        primaryKey: true, 
         type: DataTypes.INTEGER
     },
     customerId: {
-        allowNull: false,
         field: 'customer_id',
+        allowNull: false,
         type: DataTypes.INTEGER,
         references: {
-            model: CUSTOMER_TABLE,
-            key: 'id'
+          model: CUSTOMER_TABLE,
+          key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-    },
-    createdAt: {
+        onDelete: 'SET NULL'
+      },
+      createdAt: {
         allowNull: false,
+        field: 'created_at',
         type: DataTypes.STRING,
         defaultValue: moment().format('L')  
     }
@@ -33,6 +35,7 @@ class Stock extends Model{
     static associate(models) {
         this.belongsTo(models.Customer, {as: 'customer'});
         this.belongsToMany(models.Product, {
+            as: 'items',
             through: models.StockProduct,
             foreignKey: 'stockId',
             otherKey: 'productId'

@@ -35,7 +35,7 @@ const customerSchema = {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
     }
 }
 
@@ -43,11 +43,10 @@ const customerSchema = {
 class Customer extends Model {
     static associate(models){
         this.belongsTo(models.User, {as: 'user'})
-
-        this.hasMany(models.Stock),{
-            as: 'stock',
+        this.hasMany(models.Stock, {
+            as: 'stocks',
             foreignKey: 'customerId'
-        }
+        })
     }
     
     static config(sequelize){

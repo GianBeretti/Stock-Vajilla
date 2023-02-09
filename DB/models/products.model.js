@@ -27,7 +27,7 @@ const productSchema = {
             key: 'id'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
     }
 }
 
