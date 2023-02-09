@@ -7,6 +7,16 @@ class UserService {
     constructor(){};
 
 
+    async find(){
+        const users = await models.User.findAll();
+        return users
+    }
+    async findbyEmail(email){
+        const users = await models.User.findOne({
+            where: {email}
+        });
+        return users
+    }
 
     async create(data){
         const hash = await bcrypt.hash(data.password, 10);

@@ -8,7 +8,8 @@ const config = {
     dbHost: process.env.DB_HOST,
     dbName: process.env.DB_NAME,
     dbUrl: process.env.DB_URL,
-    isProd: process.env.NODE_ENV === 'production'
+    isProd: process.env.NODE_ENV === 'production',
+    apiKey: process.env.API_KEY
 }
 
 

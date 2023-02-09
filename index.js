@@ -1,7 +1,7 @@
 const express = require('express');
 const routerApi = require('./routes/index')
 require('dotenv').config()
-
+require('./utils/auth')
 const app = express();
 app.use(express.json());
 
