@@ -9,7 +9,8 @@ const config = {
     dbName: process.env.DB_NAME,
     dbUrl: process.env.DB_URL,
     isProd: process.env.NODE_ENV === 'production',
-    apiKey: process.env.API_KEY
+    apiKey: process.env.API_KEY,
+    secret: process.env.SECRET
 }
 
 
