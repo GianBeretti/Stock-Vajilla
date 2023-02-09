@@ -14,8 +14,6 @@ class ProductService {
             options.offset = offset
         }
         const produtcs = await models.Product.findAll(options);
-
-        delete produtcs.image
         return produtcs
     }
 
