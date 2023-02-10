@@ -1,3 +1,4 @@
+const passport = require('passport');
 const express = require('express');
 const StockService = require('../services/stock.service');
 const validatorHandler = require('../middleware/validatorHandler')

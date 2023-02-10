@@ -17,7 +17,7 @@ router.post('/login',
             };
             const payload = {
                 sub: user.id,
-                role: 'customer'
+                role: user.role
             };
             const token = jwt.sign(payload, secret, jwtConfig)
             res.json({user, token})

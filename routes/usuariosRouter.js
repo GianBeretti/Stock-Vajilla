@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('passport');
 const UserService = require('./../services/user.services');
 const validatorHandler = require('../middleware/validatorHandler');
 const chekApiKey = require('./../middleware/authHandler')
@@ -9,7 +10,6 @@ const router = express.Router();
 const service = new UserService();
 
 router.get('/',
-    chekApiKey,
     async (req, res, next) => {
     try {
         const users = await service.find()
