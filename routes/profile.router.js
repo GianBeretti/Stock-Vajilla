@@ -6,7 +6,7 @@ const router = express.Router();
 const {config} = require('./../config/config')
 
 
-router.post('/login',
+router.post('/my-orders',
     passport.authenticate('local', {session: false}),
     async (req, res, next) => {
         try {
@@ -20,7 +20,6 @@ router.post('/login',
                 role: user.role
             };
             const token = jwt.sign(payload, secret, jwtConfig)
-            
             res.json({user, token})
         } catch (error) {
             next(error)

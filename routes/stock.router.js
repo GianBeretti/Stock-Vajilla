@@ -1,4 +1,5 @@
 const passport = require('passport');
+const {checkRoles} = require('./../middleware/authHandler');
 const express = require('express');
 const StockService = require('../services/stock.service');
 const validatorHandler = require('../middleware/validatorHandler')
@@ -8,18 +9,22 @@ const router = express.Router();
 const service = new StockService();
 
 
-router.post('/',
-    validatorHandler(createStockSchema, 'body'),
-    async(req, res, next) => {
-        try {
-            const body = req.body;
-            const newStock = await service.create(body);
-            console.log(newStock)
-            res.json(newStock)  
-        } catch (error) {
-            next(error)
-        }
-    } )
+router.post(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    //validatorHandler(createOrderSchema, 'body'),
+    async (req, res, next) => {
+      try {
+        const body = {
+          userId: req.user.sub
+        };
+        const order = await service.create(body);
+        res.status(201).json(order);
+      } catch (error) {
+        next(error);
+      }
+    }
+  );
 
 router.get('/:id', 
     validatorHandler(getStockSchema, 'params'),

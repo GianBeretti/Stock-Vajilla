@@ -1,7 +1,8 @@
 const express = require('express');
 const passport = require('passport');
 const CustomerService = require('./../services/customer.service');
-const validatorHandler = require('./../middleware/validatorHandler')
+const validatorHandler = require('./../middleware/validatorHandler');
+const {checkRoles} = require('./../middleware/authHandler');
 const {getCustomerSchema, createUserSchema, updateCustomerSchema} = require('./../schemas/customer.schema');
 
 const router = express.Router();
@@ -9,20 +10,24 @@ const service = new CustomerService();
 
 
 router.get('/',
-async(req, res, next) => {
-    try {
-        const customers = await service.find();
-        res.json(customers)
-    } catch (error) {
-        next(error)
-    }
+    passport.authenticate('jwt', {session: false}),
+    checkRoles('admin'),
+    async(req, res, next) => {
+        try {
+            const customers = await service.find();
+            res.json(customers)
+        } catch (error) {
+            next(error)
+        }
 });
 
 router.get('/:id',
     passport.authenticate('jwt', {session: false}),
+    checkRoles('admin'),
     validatorHandler(getCustomerSchema, 'params'),
     async (req, res, next) => {
     try {
+        const {id} = req.params
         const customer = await service.findOne(id);
         res.json(customer)
     } catch (error) {
